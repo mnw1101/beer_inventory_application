@@ -16,7 +16,7 @@ import { FooterComponent } from './footer/footer.component';
     ApartmentSelectionComponent,
     ApartmentOverviewComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

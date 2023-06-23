@@ -39,12 +39,39 @@
 }
 
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 3px solid #fee898;
+  margin: auto;
+  margin-top: 3%;
+  width: 25%;
+  padding: 1px;
+  background-color: #fff8e2;
 }
 
-.login-button {
+.login-container h3 {
+  margin-left: 10px;
+}
+
+.login-container input {
+  margin-top: 5px;
+  margin-right: 3px;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-container button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-container p {
+  color: grey;
+  margin-left: 15px;
+}
+
+/* .login-button {
   font-size: 16px;
   padding: 12px 30px;
   margin: 10px;
@@ -58,5 +85,8 @@
 
 .login-button:hover {
   background-color: #007a99;
-}
+} */
+/*
+.login-content {
 
+} */
