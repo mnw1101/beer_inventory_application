@@ -1,0 +1,70 @@
+<h2>Apartment Selection</h2>
+<p>Welcome to {{ apartment }}!</p>
+<div>
+<div>
+  <input type="text" [(ngModel)]="newPersonName" placeholder="Enter person's name">
+  <select [(ngModel)]="newPersonRole">
+    <option value="admin">Admin</option>
+    <option value="flatmate">Flatmate</option>
+    <option value="guest">Guest</option>
+  </select>
+  <button (click)="addPerson()">Add Person</button>
+</div>
+
+<div *ngIf="people.length > 0">
+  <h3>People in the Apartment:</h3>
+  <ul>
+    <li *ngFor="let person of people; let i = index">
+      <span>{{ person.name }} - {{ person.role }}</span>
+      <button (click)="editPerson(i)">Edit</button>
+      <button (click)="deletePerson(i)">Delete</button>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="editingPerson !== null">
+  <h3>Edit Person:</h3>
+  <div>
+    <input type="text" [(ngModel)]="editingPerson.name" placeholder="Enter person's name">
+    <select [(ngModel)]="editingPerson.role">
+      <option value="admin">Admin</option>
+      <option value="flatmate">Flatmate</option>
+      <option value="guest">Guest</option>
+    </select>
+    <button (click)="saveEdit()">Save</button>
+  </div>
+</div>
+</div>
+
+<div>
+  <div>
+    <!-- Other content of the component -->
+  <br>
+    <div>
+      <label for="storageCapacity">Storage Capacity:</label>
+      <br>
+      <input type="number" id="storageCapacity" [(ngModel)]="storageCapacity">
+    </div>
+  <br>
+    <div>
+      <label for="criticalMass">Critical Mass:</label>
+      <br>
+      <input type="number" id="criticalMass" [(ngModel)]="criticalMass">
+    </div>
+  <br>
+    <button (click)="saveConfig()">Save Configuration</button>
+  <br>
+    <div>
+      <h3>Configuration:</h3>
+      <p>Storage Capacity: {{ storageCapacity }}</p>
+      <p>Critical Mass: {{ criticalMass }}</p>
+    </div>
+
+</div>
+</div>
+
+<div>
+  <!-- Other content of the component -->
+
+  <button (click)="goBack()">Go Back</button>
+</div>

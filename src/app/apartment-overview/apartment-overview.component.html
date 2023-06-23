@@ -1,0 +1,15 @@
+<h2 class="heading">Welcome</h2>
+<p class="text">Choose between three apartments.</p>
+<div class="apartments-container">
+  <button class="apartment-button" (click)="selectApartment('apartment1')">Apartment 1</button>
+  <button class="apartment-button" (click)="selectApartment('apartment2')">Apartment 2</button>
+  <button class="apartment-button" (click)="selectApartment('apartment3')">Apartment 3</button>
+</div>
+
+<div class="login-container" *ngIf="selectedApartment !== ''">
+  <input type="password" [(ngModel)]="password" placeholder="Enter Password">
+  <button (click)="login()">Login</button>
+
+<p>Password: xy</p>
+
+</div>
