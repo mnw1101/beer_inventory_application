@@ -1,0 +1,110 @@
+h2 {
+  margin-left: 25px;
+  margin-top: 30px;
+  size: 50px;
+}
+
+.managePeople {
+  float: left;
+  width: 45%;
+}
+
+.managePeople h3 {
+  margin-top: 30px;
+  margin-left: 25px;
+}
+
+.managePeople input {
+  margin-top: 0;
+  margin-right: 3px;
+  margin-left: 25px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 0;
+}
+
+.managePeople select {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.managePeople button {
+  font-size: 13px;
+  padding: 7px 13px;
+  margin: 10px;
+  background-color: rgb(255, 206, 85);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.residentsList {
+  margin-left: 20px;
+}
+
+.editPerson {
+  margin-left: 20px;
+  margin-top: 25px;
+  padding: 0;
+  width: 55%;
+}
+
+
+.manageInventory {
+  float: right;
+  width: 55%;
+}
+
+.manageInventory input {
+  margin-top: 5px;
+  margin-right: 3px;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.manageInventory button {
+  font-size: 13px;
+  padding: 7px 13px;
+  margin: 10px;
+  background-color: rgb(255, 206, 85);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.manageInventory button {
+  margin-left: 60px;
+}
+
+.backButton-container {
+  position: fixed;
+  padding: 20px;
+  top: 570px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.backButton {
+  font-size: 14px;
+  padding: 13px 20px;
+  margin: 10px;
+  background-color: rgb(255, 206, 85);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.backButton:hover {
+  background-color: rgb(255, 224, 165);
+}

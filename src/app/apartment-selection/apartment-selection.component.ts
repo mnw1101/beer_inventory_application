@@ -104,6 +104,7 @@ interface Person {
   templateUrl: './apartment-selection.component.html',
   styleUrls: ['./apartment-selection.component.css']
 })
+
 export class ApartmentSelectionComponent implements OnInit {
   apartment: string | null = '';
   people: Person[] = [];
@@ -111,17 +112,25 @@ export class ApartmentSelectionComponent implements OnInit {
   newPersonRole: string = '';
   editingPerson: Person | null = null;
   editingPersonIndex: number | null = null;
+
   storageCapacity: number = 0;
   criticalMass: number = 0;
+
+  membersObject: {name: string, beerBottlesBought: number, beerBottlesConsumed: number} [] = [];
+  personMostBeerBottlesBought: string = " - ";
+  personMostBeerBottlesConsumed: string = " - ";
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
+
   ngOnInit() {
     this.apartment = this.route.snapshot.paramMap.get('id');
     this.loadPeople();
+
     const config = JSON.parse(localStorage.getItem(this.apartment!) || '{}');
     this.storageCapacity = config.storageCapacity || 0;
     this.criticalMass = config.criticalMass || 0;
@@ -178,7 +187,17 @@ export class ApartmentSelectionComponent implements OnInit {
     alert('Configuration saved successfully!');
   }
 
+  // addMemberToMembersObject(): void {
+  //   this.addMemberToMembersObject = this.people.map(name => ({
+  //     name: name,
+  //     beerBottlesBought: 0,
+  //     beerBottlesConsumed: 0
+  //   }));
+  // }
+
+
   goBack() {
     this.router.navigate(['/apartment-overview']);
   }
+
 }
