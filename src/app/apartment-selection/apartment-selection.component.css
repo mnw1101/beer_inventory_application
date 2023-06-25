@@ -42,6 +42,10 @@ h2 {
   transition: background-color 0.3s;
 }
 
+.managePeople button:hover {
+  background-color: rgb(255, 224, 165);
+}
+
 .residentsList {
   margin-left: 20px;
 }
@@ -82,6 +86,18 @@ h2 {
 
 .manageInventory button {
   margin-left: 60px;
+}
+
+.manageInventory button:hover {
+  background-color: rgb(255, 224, 165);
+}
+
+.budget-container button {
+  margin-left: 5px;
+}
+
+.budget-container button:hover {
+  background-color: rgb(255, 224, 165);
 }
 
 .backButton-container {

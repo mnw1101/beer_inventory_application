@@ -97,6 +97,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 interface Person {
   name: string;
   role: string;
+  // beerBought: any;
+  // beerConsumed: any;
+}
+
+interface Price {
+  euro: number;
 }
 
 @Component({
@@ -116,9 +122,17 @@ export class ApartmentSelectionComponent implements OnInit {
   storageCapacity: number = 0;
   criticalMass: number = 0;
 
-  membersObject: {name: string, beerBottlesBought: number, beerBottlesConsumed: number} [] = [];
-  personMostBeerBottlesBought: string = " - ";
-  personMostBeerBottlesConsumed: string = " - ";
+  beerBought: Person[] = [];
+  beerConsumed: Person[] = [];
+
+  showPersonWhoBought: string[] = [this.newPersonName];
+  dataWhoBought: Person[] = [];
+
+  showPersonWhoConsumed: string[] = [this.newPersonName];
+  dataWhoConsumed: Person[] = [];
+
+  price: number = 0;
+  totalPrice: any;
 
 
   constructor(
@@ -187,14 +201,31 @@ export class ApartmentSelectionComponent implements OnInit {
     alert('Configuration saved successfully!');
   }
 
-  // addMemberToMembersObject(): void {
-  //   this.addMemberToMembersObject = this.people.map(name => ({
-  //     name: name,
-  //     beerBottlesBought: 0,
-  //     beerBottlesConsumed: 0
-  //   }));
+  // beerBought(): void {
+  //   let tmpvar: Person[] = Array.from(this.people);
+  //   this.beerBought = tmpvar.sort((n, m) => (n.beerBought > m.beerBought));
+  //   this.dataWhoBought = this.beerBought;
   // }
 
+  // beerConsumed(): void {
+  //   let tmpvar: Person[] = Array.from(this.people);
+  //   this.beerConsumed = tmpvar.sort((n, m) => (n.beerConsumed > m.beerConsumed));
+  //   this.dataWhoConsumed = this.beerConsumed;
+  // }
+
+  addToPrice() {
+    const addPrice: Price = {
+      euro: this.price
+    };
+    this.price = 0;
+  }
+
+  // get totalPrice() {
+  //   for(let i = 0; i < this.storageCapacity; i++) {
+  //     this.totalPrice+=this.addToPrice;
+  //   }
+  //   return this.totalPrice;
+  // }
 
   goBack() {
     this.router.navigate(['/apartment-overview']);

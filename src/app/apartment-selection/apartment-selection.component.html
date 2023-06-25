@@ -59,28 +59,27 @@
       </div>
     </div> -->
     <br>
-    <h4>Purchase</h4>
-    <div class="purchase-container">
-      <span class="label">Bought the most beer bottles - </span>
-      <span class="number"> {{personMostBeerBottlesBought}} </span>
+    <div class="budget-container">
+      <h4>Budget</h4>
+      <label for="addToPrice">Price: {{price}}</label>
+      <input type="number" id="price" [(ngModel)]="price">
+      <button (click)="addToPrice()">add to price</button>
+      <br>
+      <label for="totalPrice">Total price: {{totalPrice}}</label>
     </div>
-
-
+    <br>
+    <div class="purchase-container">
+      <h4>Purchase</h4>
+      <span class="label">Purchased the most beer bottles - </span>
+      <span class="number"> {{newPersonName}} </span>
+    </div>
+    <br>
+    <h4>Consumed</h4>
+    <div class="consumed-container">
+      <span class="label">Consumed the most beer bottles - </span>
+      <span class="number"> {{newPersonName}} </span>
+    </div>
 </div>
-
-<!-- <div> -->
-  <!-- <label for="beerByPerson">Who has drunk how much beer?</label> -->
-  <!-- <select name="people">
-    <option value="">{{this.newPersonName}}</option>
-    <option value="">{{this.newPersonName}}</option>
-  </select> -->
-
-  <!-- <input type="text" [(ngModel)]="newPersonName" placeholder="Enter person's name">
-  <input type="text" [(ngModel)]="amountOfBeer" placeholder="">
-  <br>
-  <button (click)="mostBottlesBought()">Calculate</button>
-  <label for="beerking/queen">Beerking/queen is:</label> -->
-<!-- </div> -->
 
 <div class="backButton-container">
   <button class="backButton" (click)="goBack()">Go Back</button>
