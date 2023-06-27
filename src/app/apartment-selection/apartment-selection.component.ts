@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface Person {
   name: string;
+
   role?: string;
+
   quantity: number;
+
   price?: number;
+
   totalPrice?: number;
+
   age?: number;
+
   date?: Date;
+
   month?: string;
+
   totalQuantity?: number;
 }
 
@@ -19,48 +28,68 @@ interface Price {
 
 type InventoryItem = {
   name: string;
+
   quantity: number;
+
   price: number;
 };
 
 @Component({
   selector: 'app-apartment-selection',
+
   templateUrl: './apartment-selection.component.html',
+
   styleUrls: ['./apartment-selection.component.css'],
 })
 export class ApartmentSelectionComponent implements OnInit {
   // Move newPerson inside the component class
+
   newPerson: Person = {
     name: 'Alice',
+
     role: 'Engineer',
+
     quantity: 0,
   };
 
   apartment: string | null = '';
+
   people: Person[] = [];
+
   newPersonName: string = '';
+
   newPersonRole: string = '';
+
   editingPerson: Person | null = null;
+
   editingPersonIndex: number | null = null;
 
   storageCapacity: number = 0;
+
   criticalMass: number = 0;
 
   showPersonWhoBought: string[] = [this.newPersonName];
+
   dataWhoBought: Person[] = [];
+
   beerBought: Person[] = [];
 
   showPersonWhoConsumed: string[] = [this.newPersonName];
+
   dataWhoConsumed: Person[] = [];
+
   beerConsumed: Person[] = [];
 
   price: number = 0;
+
   pricePerBottle: number = 0;
+
   totalPrice: number = 0;
 
   totalBudget: number = 0;
 
   budgetSaved: boolean = false;
+
   budgetSavedMessage: string = '';
 
   selectedPersonName: string = '';
@@ -70,27 +99,42 @@ export class ApartmentSelectionComponent implements OnInit {
   items: InventoryItem[] = [];
 
   newPurchasePersonName: string = '';
+
   newPurchaseQuantity: number = 0;
+
   newPurchasePrice: number = 0;
+
   newPurchaseDate: Date = new Date();
+
   purchases: Person[] = [];
+
   monthlyPurchases: Person[] = [];
+
   totalPurchaseQuantity: number = 0;
 
   newConsumptionPersonName: string = '';
+
   newConsumptionQuantity: number = 0;
+
   newConsumptionDate: Date = new Date();
+
   consumption: Person[] = [];
+
   monthlyConsumption: Person[] = [];
+
   totalConsumptionQuantity: number = 0;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   // Initializes the component when it is first loaded
+
   // Retrieves and sets the apartment ID from the route
+
   // Loads people data and configuration from local storage
+
   ngOnInit() {
     this.apartment = this.route.snapshot.paramMap.get('id');
+
     this.loadPeople();
 
     const config = JSON.parse(localStorage.getItem(this.apartment!) || '{}');
@@ -103,12 +147,15 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Calculates the total space used by summing the quantities of all items
+
   // Updates the `totalSpaceUsed` property with the calculated value
+
   calculateTotalSpaceUsed() {
     this.totalSpaceUsed = this.calculateTotalQuantity();
   }
 
   // Calculates and returns the total quantity of all items
+
   calculateTotalQuantity(): number {
     let totalQuantity = 0;
 
@@ -120,28 +167,37 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Loads people data from local storage and updates the `people` property
+
   loadPeople() {
     const storedPeople = localStorage.getItem(`peopleData-${this.apartment}`);
+
     if (storedPeople) {
       this.people = JSON.parse(storedPeople);
     }
   }
 
   // Saves the `people` data to local storage
+
   savePeople() {
     localStorage.setItem(
       `peopleData-${this.apartment}`,
+
       JSON.stringify(this.people)
     );
   }
 
   // Adds a new person to the `people` array with the provided name and role
+
   // Saves the updated `people` data to local storage
+
   // Resets the `newPersonName` and `newPersonRole` properties
+
   addPerson() {
     const newPerson: Person = {
       name: this.newPersonName,
+
       role: this.newPersonRole,
+
       quantity: 0,
     };
 
@@ -155,7 +211,9 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Sets the `editingPerson` and `editingPersonIndex` properties based on the provided index
+
   // Sets the `selectedPersonName` to the name of the person being edited
+
   editPerson(index: number) {
     this.editingPersonIndex = index;
 
@@ -165,8 +223,11 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Saves the edited person's data to the `people` array
+
   // Saves the updated `people` data to local storage
+
   // Resets the `editingPerson`, `editingPersonIndex`, and `selectedPersonName` properties
+
   saveEdit() {
     if (this.editingPersonIndex !== null && this.editingPerson) {
       this.people[this.editingPersonIndex] = this.editingPerson;
@@ -182,7 +243,9 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Deletes a person from the `people` array based on the provided index
+
   // Saves the updated `people` data to local storage
+
   deletePerson(index: number) {
     this.people.splice(index, 1);
 
@@ -190,10 +253,13 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Saves the storage capacity and critical mass configuration to local storage
+
   // Displays an alert to indicate the successful saving of the configuration
+
   saveConfig() {
     const config = {
       storageCapacity: this.storageCapacity,
+
       criticalMass: this.criticalMass,
     };
 
@@ -203,12 +269,15 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Adds the `pricePerBottle` value to the `totalPrice` property
+
   addToPrice() {
     this.totalPrice += this.pricePerBottle;
   }
 
   // Saves the total budget to local storage with the apartment ID as the key
+
   // Updates the `budgetSaved` and `budgetSavedMessage` properties based on the success of saving
+
   saveTotalBudget() {
     const budget = {
       totalBudget: this.totalBudget,
@@ -219,16 +288,18 @@ export class ApartmentSelectionComponent implements OnInit {
 
       this.budgetSaved = true;
 
-      this.budgetSavedMessage = 'Successfully saved';
+      alert('Configuration saved successfully');
     } catch (error) {
       this.budgetSaved = false;
 
-      this.budgetSavedMessage = 'Not successfully saved';
+      this.budgetSavedMessage = 'Configuration not saved successfully';
     }
   }
 
   // Sets the `newConsumptionPersonName`, `newConsumptionQuantity`, and `newConsumptionDate` properties
+
   // Removes the consumption entry from the `consumption` array based on the provided index
+
   editConsumption(index: number): void {
     this.newConsumptionPersonName = this.consumption[index].name;
 
@@ -240,12 +311,15 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Deletes a consumption entry from the `consumption` array based on the provided index
+
   deleteConsumption(index: number): void {
     this.consumption.splice(index, 1);
   }
 
   // Adds a consumption entry to the `beerConsumed` array
+
   // Resets the `newConsumptionPersonName` and `newConsumptionQuantity` properties
+
   addConsumption(consumption: Person) {
     this.beerConsumed.push(consumption);
 
@@ -255,12 +329,17 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Saves the consumption data to the `consumption` array
+
   // Updates the `totalSpaceUsed`, `newConsumptionPersonName`, `newConsumptionQuantity`, `newConsumptionDate`, and `totalConsumptionQuantity` properties
+
   saveConsumption(consumptionData: Person) {
     const consumption: Person = {
       name: consumptionData.name,
+
       quantity: consumptionData.quantity,
+
       date: this.newConsumptionDate,
+
       month: this.getMonth(),
     };
 
@@ -278,32 +357,35 @@ export class ApartmentSelectionComponent implements OnInit {
 
     this.totalConsumptionQuantity = this.consumption.reduce(
       (total, item) => total + item.quantity,
+
       0
     );
   }
 
   // Logs the monthly consumption data to the console
+
   // Sorts the `consumption` array by quantity in descending order
-  showMonthlyConsumption(): void {
-    console.log('Monthly Consumption:');
 
-    this.consumption.sort((a, b) => b.quantity - a.quantity);
+  showMonthlyConsumption() {
+    // Reset the monthlyConsumption array
 
-    for (const consumption of this.consumption) {
-      const price = consumption.price ?? 0;
+    this.monthlyConsumption = [];
 
-      console.log(`Product: ${consumption.name}`);
+    // Filter the consumption array to get the entries for the current month
 
-      console.log(`Quantity: ${consumption.quantity}`);
+    const currentMonth = new Date().toLocaleString('default', {
+      month: 'long',
+    });
 
-      console.log(`Price: ${price}`);
-
-      console.log('==============================');
-    }
+    this.monthlyConsumption = this.consumption.filter(
+      (item) => item.month === currentMonth
+    );
   }
 
   // Sets the `newPurchasePersonName`, `newPurchaseQuantity`, and `newPurchasePrice` properties
+
   // Removes the purchase entry from the `purchases` array based on the provided index
+
   editPurchase(index: number) {
     this.newPurchasePersonName = this.purchases[index].name;
 
@@ -315,12 +397,15 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Deletes a purchase entry from the `purchases` array based on the provided index
+
   deletePurchase(index: number) {
     this.purchases.splice(index, 1);
   }
 
   // Saves the purchase data to the `purchases` array
+
   // Updates the `totalSpaceUsed`, `totalPrice`, `newPurchasePersonName`, `newPurchaseQuantity`, `newPurchasePrice`, `newPurchaseDate`, `totalBudget`, `monthlyPurchases`, and `totalConsumptionQuantity` properties
+
   savePurchase() {
     const purchase: Person = {
       name: this.newPurchasePersonName,
@@ -360,6 +445,7 @@ export class ApartmentSelectionComponent implements OnInit {
 
     const monthlyPurchase: Person = {
       name: 'All Quantity',
+
       quantity: totalQuantity,
     };
 
@@ -375,24 +461,33 @@ export class ApartmentSelectionComponent implements OnInit {
 
     this.totalConsumptionQuantity = this.consumption.reduce(
       (total, item) => total + item.quantity,
+
       0
     );
   }
 
   // Filters the `purchases` array to get the monthly purchases
+
   // Sorts the monthly purchases by quantity in descending order
+
   // Updates the `monthlyPurchases` property with the filtered and sorted data
+
   showMonthlyPurchases() {
     this.monthlyPurchases = this.purchases
+
       .filter((purchase) => purchase.month === this.getMonth())
+
       .sort((a, b) => b.quantity - a.quantity);
   }
 
   // Calculates and returns the number of bottles left based on the storage capacity, total purchase quantity, and total consumption quantity
+
   getBottlesLeft(): number {
     let totalPurchaseQuantity = 0;
 
     let totalConsumptionQuantity = 0;
+
+    // let alertMessage = "The critial mass has been reached. It's time to restock!";
 
     for (const purchase of this.purchases) {
       totalPurchaseQuantity += purchase.quantity;
@@ -405,10 +500,17 @@ export class ApartmentSelectionComponent implements OnInit {
     const bottlesLeft =
       this.storageCapacity + totalPurchaseQuantity - totalConsumptionQuantity;
 
+    // if(bottlesLeft <= this.criticalMass) {
+
+    //   alert(alertMessage);
+
+    // }
+
     return bottlesLeft;
   }
 
   // Calculates and returns the total purchase quantity from the `purchases` array
+
   calculateTotalPurchaseQuantity(): number {
     let totalQuantity = 0;
 
@@ -420,6 +522,7 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Calculates and returns the total purchase quantity from the `monthlyPurchases` array
+
   getTotalPurchaseQuantity(): number {
     let totalQuantity = 0;
 
@@ -431,6 +534,7 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Returns the current month as a string
+
   getMonth(): string {
     const currentDate = new Date();
 
@@ -440,6 +544,7 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Calculates and returns the total consumption quantity from the `monthlyConsumption` array
+
   getTotalConsumptionQuantity(): number {
     let totalQuantity = 0;
 
@@ -451,6 +556,7 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Finds and returns the name of the person with the highest purchase quantity
+
   getShoppingQueenKingName(): string {
     let highestQuantity = 0;
 
@@ -459,6 +565,7 @@ export class ApartmentSelectionComponent implements OnInit {
     for (const purchase of this.purchases) {
       if (purchase.quantity > highestQuantity) {
         highestQuantity = purchase.quantity;
+
         shoppingQueenKingName = purchase.name;
       }
     }
@@ -467,6 +574,7 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Finds and returns the name of the person with the highest consumption quantity
+
   getBeerQueenKingName(): string {
     let highestQuantity = 0;
 
@@ -475,6 +583,7 @@ export class ApartmentSelectionComponent implements OnInit {
     for (const consumption of this.consumption) {
       if (consumption.quantity > highestQuantity) {
         highestQuantity = consumption.quantity;
+
         beerQueenKingName = consumption.name;
       }
     }
@@ -483,6 +592,7 @@ export class ApartmentSelectionComponent implements OnInit {
   }
 
   // Navigates back to the apartment overview page
+
   goBack() {
     this.router.navigate(['/apartment-overview']);
   }

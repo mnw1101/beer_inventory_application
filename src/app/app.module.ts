@@ -7,16 +7,12 @@ import { ApartmentOverviewComponent } from './apartment-overview/apartment-overv
 import { ApartmentSelectionComponent } from './apartment-selection/apartment-selection.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ApartmentSelectionComponent,
     ApartmentOverviewComponent,
-    HeaderComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,

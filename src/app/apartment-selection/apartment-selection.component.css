@@ -1,146 +1,154 @@
 h2 {
   margin-left: 25px;
+
   margin-top: 30px;
-  size: 50px;
-}
 
-.managePeople {
-  float: left;
-  width: 45%;
-}
-
-.managePeople h3 {
-  margin-top: 30px;
-  margin-left: 25px;
-}
-
-.managePeople input {
-  margin-top: 0;
-  margin-right: 3px;
-  margin-left: 25px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 0;
-}
-
-.managePeople select {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.managePeople button {
-  font-size: 13px;
-  padding: 7px 13px;
-  margin: 10px;
-  background-color: rgb(255, 206, 85);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.managePeople button:hover {
-  background-color: rgb(255, 224, 165);
-}
-
-.residentsList {
-  margin-left: 20px;
-}
-
-.editPerson {
-  margin-left: 20px;
-  margin-top: 25px;
-  padding: 0;
-  width: 55%;
-}
-
-.manageInventory {
-  float: right;
-  width: 55%;
-}
-
-.manageInventory input {
-  margin-top: 5px;
-  margin-right: 3px;
-  margin-left: 10px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.manageInventory button {
-  font-size: 13px;
-  padding: 7px 13px;
-  margin: 10px;
-  background-color: rgb(255, 206, 85);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.manageInventory button {
-  margin-left: 60px;
-}
-
-.manageInventory button:hover {
-  background-color: rgb(255, 224, 165);
-}
-
-.budget-container button {
-  margin-left: 5px;
-}
-
-.budget-container button:hover {
-  background-color: rgb(255, 224, 165);
-}
-
-.backButton-container {
-  position: fixed;
-  padding: 20px;
-  top: 570px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.backButton {
-  font-size: 14px;
-  padding: 13px 20px;
-  margin: 10px;
-  background-color: rgb(255, 206, 85);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.backButton:hover {
-  background-color: rgb(255, 224, 165);
+  font-size: 24px;
 }
 
 .scroll-container {
   display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: space-between;
+
   overflow: auto;
-  height: 600px; /* Set the desired height of the scrollable container */
+
+  max-height: calc(100vh - 150px);
+
+  padding: 0 20px;
 }
 
-.managePeople {
-  width: 45%;
-  padding-right: 20px; /* Add some spacing between the two sections */
-}
-
+.managePeople,
 .manageInventory {
-  width: 55%;
-  padding-left: 20px; /* Add some spacing between the two sections */
+  flex: 0 0 calc(50% - 20px);
+
+  padding: 10px;
 }
 
-.pweiß {
-  color: white;
-  background-color: white;
+.managePeople h3,
+.manageInventory h3 {
+  margin-top: 30px;
+
+  margin-bottom: 10px;
+
+  font-size: 16px;
+
+  justify-content: center;
 }
+
+.managePeople input,
+.managePeople select,
+.manageInventory input {
+  margin-top: 5px;
+
+  margin-right: 3px;
+
+  padding: 5px 10px;
+
+  border: 1px solid whitesmoke;
+
+  border-radius: 4px;
+
+  background-color: whitesmoke;
+
+  justify-content: center;
+}
+
+.managePeople button,
+.manageInventory button {
+  font-size: 13px;
+
+  padding: 7px 13px;
+
+  margin-top: 10px;
+
+  margin-left: 10px;
+
+  background-color: darkcyan;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+
+.managePeople button:hover,
+.manageInventory button:hover {
+  background-color: rgba(1, 185, 185, 0.799);
+}
+
+.manageInventory label[for="spaceLeftUnits"] {
+  font-weight: bold;
+}
+
+.manageInventory label[for="totalPriceEuro"] {
+  font-weight: bold;
+}
+
+.manageInventory label[for="shoppingqueen"] {
+  font-weight: bold;
+}
+
+.manageInventory label[for="beerking"] {
+  font-weight: bold;
+}
+
+.residentsList,
+.editPerson {
+  margin-top: 25px;
+}
+
+.showMonthlyConsumption {
+  margin-bottom: 50px;
+}
+
+.backButton-container {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.backButton {
+  font-size: 14px;
+
+  padding: 13px 20px;
+
+  background-color: darkcyan;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+
+  margin: 10px;
+}
+
+.backButton:hover {
+  background-color: rgba(1, 185, 185, 0.799);
+}
+
+/* .managePeople{
+
+
+
+
+  background-color:pink;
+
+
+
+
+} */
