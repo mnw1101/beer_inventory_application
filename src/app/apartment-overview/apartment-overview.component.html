@@ -2,18 +2,20 @@
 <p class="text">Choose between three apartments!</p>
 
 <div class="apartments-container">
-  <button class="apartment-button" (click)="selectApartment('apartment1')">Apartment 1</button>
-  <button class="apartment-button" (click)="selectApartment('apartment2')">Apartment 2</button>
-  <button class="apartment-button" (click)="selectApartment('apartment3')">Apartment 3</button>
+  <button class="apartment-button" (click)="selectApartment('apartment1')">
+    Apartment 1
+  </button>
+  <button class="apartment-button" (click)="selectApartment('apartment2')">
+    Apartment 2
+  </button>
+  <button class="apartment-button" (click)="selectApartment('apartment3')">
+    Apartment 3
+  </button>
 </div>
 
 <div class="login-container" *ngIf="selectedApartment !== ''">
-    <h3>Login into your apartment</h3>
-    <input type="password" [(ngModel)]="password" placeholder="Enter Password">
-    <button (click)="login()">Login</button>
-    <p>Password hint: xy</p>
+  <h3>Login into your apartment</h3>
+  <input type="password" [(ngModel)]="password" placeholder="Enter Password" />
+  <button (click)="login()">Login</button>
+  <p>Password hint: xy</p>
 </div>
-
-
-
-

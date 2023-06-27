@@ -1,86 +1,321 @@
 <h2>Welcome to {{ apartment }}!</h2>
 
-<div class="managePeople">
-  <div>
-    <h3>Manage all residents</h3>
-    <input type="text" [(ngModel)]="newPersonName" placeholder="Enter person's name">
-    <select [(ngModel)]="newPersonRole">
-      <option value="admin">Admin</option>
-      <option value="flatmate">Flatmate</option>
-      <option value="guest">Guest</option>
-    </select>
-    <button (click)="addPerson()">Add Person</button>
-  </div>
-
-  <div class="residentsList" *ngIf="people.length > 0">
-    <h3>People living in {{apartment}}</h3>
-    <ul>
-      <li *ngFor="let person of people; let i = index">
-        <span>{{ person.name }} - {{ person.role }}</span>
-        <button class="editButton" (click)="editPerson(i)">Edit</button>
-        <button (click)="deletePerson(i)">Delete</button>
-      </li>
-    </ul>
-  </div>
-
-  <div class="editPerson" *ngIf="editingPerson !== null">
-    <h3>Edit Person</h3>
+<div class="scroll-container">
+  <div class="managePeople">
     <div>
-      <input type="text" [(ngModel)]="editingPerson.name" placeholder="Enter person's name">
-      <select [(ngModel)]="editingPerson.role">
+      <h3>Manage all residents</h3>
+      <input
+        type="text"
+        [(ngModel)]="newPersonName"
+        placeholder="Enter person's name"
+      />
+      <select [(ngModel)]="newPersonRole">
         <option value="admin">Admin</option>
         <option value="flatmate">Flatmate</option>
         <option value="guest">Guest</option>
       </select>
-      <button (click)="saveEdit()">Save</button>
+      <button (click)="addPerson()">Add Person</button>
+    </div>
+
+    <div class="residentsList" *ngIf="people.length > 0">
+      <h3>People living in {{ apartment }}</h3>
+      <ul>
+        <li *ngFor="let person of people; let i = index">
+          <span>{{ person.name }} - {{ person.role }}</span>
+          <button class="editButton" (click)="editPerson(i)">Edit</button>
+          <button (click)="deletePerson(i)">Delete</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="editPerson" *ngIf="editingPerson !== null">
+      <h3>Edit Person</h3>
+
+      <div>
+        <input
+          type="text"
+          [(ngModel)]="editingPerson.name"
+          placeholder="Enter person's name"
+        />
+        <select [(ngModel)]="editingPerson.role">
+          <option value="admin">Admin</option>
+          <option value="flatmate">Flatmate</option>
+          <option value="guest">Guest</option>
+        </select>
+        <button (click)="saveEdit()">Save</button>
+      </div>
     </div>
   </div>
-</div>
 
+  <div class="manageInventory">
+    <h3>Manage inventory</h3>
+    <br />
 
-<div class="manageInventory">
-      <h3>Manage inventory</h3>
-    <br>
-      <div>
-        <label for="storageCapacity">Total storage capacity:</label>
-        <input type="number" id="storageCapacity" [(ngModel)]="storageCapacity">
-      </div>
-      <div>
-        <label for="criticalMass">Critical mass:</label>
-        <input type="number" id="criticalMass" [(ngModel)]="criticalMass">
+    <div>
+      <label for="storageCapacity">Total storage capacity:</label>
+      <input type="number" id="storageCapacity" [(ngModel)]="storageCapacity" />
+      <br />
+      <label for="spaceLeft">Bottles left: {{ getBottlesLeft() }} units</label>
+      <br />
+    </div>
+
+    <div>
+      <label for="criticalMass">Critical mass:</label>
+      <input type="number" id="criticalMass" [(ngModel)]="criticalMass" />
       <button (click)="saveConfig()">Save Configuration</button>
-      </div>
+    </div>
 
-    <!-- <br>
-      <div>
-        <h3>Configuration:</h3>
-        <p>Total storage capacity: {{ storageCapacity }}</p>
-        <p>Critical mass: {{ criticalMass }}</p>
-      </div>
-    </div> -->
-    <br>
+    <br />
+
+    <div class="budget-container">
+      <h4>Total Budget</h4>
+      <label for="totalBudget">Total Budget (in euros):</label>
+      <input type="number" id="totalBudget" [(ngModel)]="totalBudget" />
+      <button (click)="saveTotalBudget()">Save Total Budget</button>
+      <br />
+      <span *ngIf="budgetSaved">{{ budgetSavedMessage }}</span>
+    </div>
+
+    <br />
+
     <div class="budget-container">
       <h4>Budget</h4>
-      <label for="addToPrice">Price: {{price}}</label>
-      <input type="number" id="price" [(ngModel)]="price">
-      <button (click)="addToPrice()">add to price</button>
-      <br>
-      <label for="totalPrice">Total price: {{totalPrice}}</label>
+      <label for="pricePerBottle"
+        >Price per bottle/0.5 liters (in euros):</label
+      >
+      <input type="number" id="pricePerBottle" [(ngModel)]="pricePerBottle" />
+      <button (click)="addToPrice()">Add to Price</button>
+      <br />
+      <label for="totalPrice">Total price: {{ totalPrice }}</label>
     </div>
-    <br>
+
+    <br />
+
     <div class="purchase-container">
       <h4>Purchase</h4>
-      <span class="label">Purchased the most beer bottles - </span>
-      <span class="number"> {{newPersonName}} </span>
-    </div>
-    <br>
-    <h4>Consumed</h4>
-    <div class="consumed-container">
-      <span class="label">Consumed the most beer bottles - </span>
-      <span class="number"> {{newPersonName}} </span>
-    </div>
-</div>
+      <br />
+      <span class="label">Shopping Queen/ King - </span>
+      <span class="number">{{ getShoppingQueenKingName() }}</span>
+      <br />
+      <span class="number">{{ selectedPersonName }}</span>
 
-<div class="backButton-container">
-  <button class="backButton" (click)="goBack()">Go Back</button>
+      <div>
+        <label for="purchaseName">Name:</label>
+        <input
+          type="text"
+          id="purchaseName"
+          [(ngModel)]="newPurchasePersonName"
+        />
+        <br />
+        <label for="purchaseQuantity">Quantity:</label>
+        <input
+          type="number"
+          id="purchaseQuantity"
+          [(ngModel)]="newPurchaseQuantity"
+        />
+        <br />
+        <label for="purchasePrice">Price per bottle:</label>
+        <input
+          type="number"
+          id="purchasePrice"
+          [(ngModel)]="newPurchasePrice"
+        />
+        <br />
+        <label for="purchaseDate">Date:</label>
+        <input type="date" id="purchaseDate" [(ngModel)]="newPurchaseDate" />
+        <br />
+        <button (click)="savePurchase()">Save Purchase Information</button>
+      </div>
+
+      <ul>
+        <li *ngFor="let purchase of purchases; let i = index">
+          <span
+            >{{ purchase.name }} - Quantity: {{ purchase.quantity }}, Price:
+            {{ purchase.price }}, Whole Price: {{ purchase.quantity }} *
+            {{ purchase.price }}, Date: {{ purchase.date }}</span
+          >
+          <button (click)="editPurchase(i)">Edit</button>
+          <button (click)="deletePurchase(i)">Delete</button>
+        </li>
+      </ul>
+
+      <br />
+
+      <h4>Monthly Purchases</h4>
+      <ul>
+        <li *ngFor="let purchase of monthlyPurchases; let i = index">
+          <span
+            >{{ purchase.name }} - Quantity: {{ purchase.quantity }}, Price:
+            {{ purchase.price }}, Whole Price: {{ purchase.quantity }} *
+            {{ purchase.price }}, Date: {{ purchase.date }}</span
+          >
+        </li>
+      </ul>
+
+      <br />
+
+      <p>Total Quantity: {{ getTotalPurchaseQuantity() }}</p>
+      <br />
+      <button (click)="showMonthlyPurchases()">Show Monthly Purchase</button>
+
+      <br />
+    </div>
+
+    <div class="consumed-container">
+      <h4>Consumed</h4>
+      <br />
+      <span class="label">Beer Queen/ King - </span>
+      <span class="number">{{ getBeerQueenKingName() }}</span>
+      <br />
+      <span class="number">{{ selectedPersonName }}</span>
+
+      <div>
+        <label for="consumptionName">Name:</label>
+        <input
+          type="text"
+          id="consumptionName"
+          [(ngModel)]="newConsumptionPersonName"
+        />
+        <br />
+        <label for="consumptionQuantity">Quantity:</label>
+        <input
+          type="number"
+          id="consumptionQuantity"
+          [(ngModel)]="newConsumptionQuantity"
+        />
+        <br />
+        <label for="consumptionDate">Date:</label>
+        <input
+          type="date"
+          id="consumptionDate"
+          [(ngModel)]="newConsumptionDate"
+        />
+        <br />
+        <button
+          (click)="
+            saveConsumption({
+              name: newConsumptionPersonName,
+              quantity: newConsumptionQuantity,
+              role: 'someRole'
+            })
+          "
+        >
+          Save Consumption Information
+        </button>
+      </div>
+
+      <ul>
+        <li *ngFor="let item of consumption; let i = index">
+          <span
+            >{{ item.name }} - Quantity: {{ item.quantity }}, Date:
+            {{ item.date }}</span
+          >
+          <button (click)="editConsumption(i)">Edit</button>
+          <button (click)="deleteConsumption(i)">Delete</button>
+        </li>
+      </ul>
+
+      <br />
+
+      <h4>Monthly Consumption</h4>
+      <ul>
+        <li *ngFor="let consumption of monthlyConsumption; let i = index">
+          <span
+            >{{ consumption.name }} - Quantity: {{ consumption.quantity }},
+            Date: {{ consumption.date }}</span
+          >
+        </li>
+      </ul>
+      <br />
+      <p>Total Quantity: {{ getTotalConsumptionQuantity() }}</p>
+      <br />
+      <button (click)="showMonthlyConsumption()">
+        Show Monthly Consumption
+      </button>
+      <br />
+    </div>
+  </div>
+
+  <br />
+
+  <div class="backButton-container">
+    <button class="backButton" (click)="goBack()">Go Back</button>
+  </div>
+
+  <br />
+
+  <div>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+    <p class="pweiß">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore et quae
+      hic delectus, blanditiis officia velit eligendi! Perspiciatis rem
+      voluptatum animi maiores modi, in sequi consequuntur aperiam cumque
+      corporis molestiae.
+    </p>
+  </div>
 </div>
